@@ -34,13 +34,7 @@ const Profile = () => {
     // If userDetails is null, show the loader
     return (
       <div className={'mt-[25%]'}>
-        <Loader
-          type='spinner-cub'
-          bgColor={'black'}
-          color={'#FFFFFF'}
-          title={'spinner-cub'}
-          size={100}
-        />
+        <Loader type='spinner-cub' bgColor={'black'} color={'#FFFFFF'} size={100} />
       </div>
     );
   }
