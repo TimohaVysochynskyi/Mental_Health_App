@@ -28,7 +28,7 @@ const Therapist = () => {
     setLoading(true);
 
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
+      const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
       const prompt = `Analyse the user's input and give suggestions or talk with them and provide an answer in paragraphs with spaces between paragraphs and points. Respond as if you are talking to the user in the first person, not the third person:\n\nUser: ${input}\nTherapist:`;
       const result = await model.generateContent(prompt);
       const response = await result.response;
@@ -43,15 +43,22 @@ const Therapist = () => {
       setMessages([...messages, newMessage, { sender: 'ai', text: aiMessage }]);
     } catch (error) {
       console.error('Error generating response:', error);
-      setMessages([...messages, newMessage, { sender: 'ai', text: 'An error occurred while generating the response.' }]);
+      setMessages([
+        ...messages,
+        newMessage,
+        {
+          sender: 'ai',
+          text: 'An error occurred while generating the response.',
+        },
+      ]);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleInputChange = (e) => setInput(e.target.value);
+  const handleInputChange = e => setInput(e.target.value);
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = e => {
     if (e.key === 'Enter') handleSend();
   };
 
@@ -69,7 +76,12 @@ const Therapist = () => {
         <h1 className="heading">Your Personal AI Assistant</h1>
         <div ref={chatBoxRef} className="chat-box">
           {messages.map((msg, index) => (
-            <div key={index} className={`message ${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}>
+            <div
+              key={index}
+              className={`message ${
+                msg.sender === 'user' ? 'user-message' : 'ai-message'
+              }`}
+            >
               {msg.text}
             </div>
           ))}
@@ -84,7 +96,9 @@ const Therapist = () => {
             placeholder="Type your message..."
             className="input-field"
           />
-          <button onClick={handleSend} className="send-button">Send</button>
+          <button onClick={handleSend} className="send-button">
+            Send
+          </button>
         </div>
       </div>
     </>

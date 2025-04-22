@@ -2,7 +2,14 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Dialog, Transition } from '@headlessui/react';
 import { Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from 'chart.js';
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+  Legend,
+} from 'chart.js';
 import Navbar from '../navbar/Navbar';
 
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
@@ -12,25 +19,30 @@ const MoodTrack = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [mood, setMood] = useState(null);
   const [moodData, setMoodData] = useState([]);
-  
+
   const username = localStorage.getItem('tokenUser');
   console.log(username);
 
   useEffect(() => {
     // Fetch existing mood data for the user
-    axios.get(`http://localhost:4000/api/moods/${username}`)
+    axios
+      .get(`http://localhost:4000/api/moods/${username}`)
       .then(response => setMoodData(response.data))
       .catch(error => console.error('Error fetching mood data:', error));
   }, [username]);
 
-  const handleDateChange = (event) => {
+  const handleDateChange = event => {
     setSelectedDate(event.target.value);
     setIsModalOpen(true);
   };
 
-  const handleMoodSelect = (selectedMood) => {
+  const handleMoodSelect = selectedMood => {
     setMood(selectedMood);
-    axios.post(`http://localhost:4000/api/moods/${username}`, { date: selectedDate, mood: selectedMood })
+    axios
+      .post(`http://localhost:4000/api/moods/${username}`, {
+        date: selectedDate,
+        mood: selectedMood,
+      })
       .then(response => {
         setMoodData(prevData => [...prevData, response.data]);
         setIsModalOpen(false);
@@ -39,7 +51,9 @@ const MoodTrack = () => {
   };
 
   const moodLabels = ['😄', '😊', '😐', '😔', '😢'];
-  const moodCounts = moodLabels.map(label => moodData.filter(entry => entry.mood === label).length);
+  const moodCounts = moodLabels.map(
+    label => moodData.filter(entry => entry.mood === label).length
+  );
 
   const data = {
     labels: moodLabels,
@@ -56,7 +70,10 @@ const MoodTrack = () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto p-12 mt-20 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 rounded-lg shadow-lg border border-gray-400" style={{ maxWidth: '840px', marginTop: '100px' }}>
+      <div
+        className="container mx-auto p-12 mt-20 bg-gradient-to-r from-gray-100 via-gray-200 to-gray-300 rounded-lg shadow-lg border border-gray-400"
+        style={{ maxWidth: '840px', marginTop: '100px' }}
+      >
         <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
           <div className="text-center">
             <input
@@ -66,7 +83,11 @@ const MoodTrack = () => {
             />
           </div>
           <Transition appear show={isModalOpen} as={React.Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={() => setIsModalOpen(false)}>
+            <Dialog
+              as="div"
+              className="relative z-10"
+              onClose={() => setIsModalOpen(false)}
+            >
               <Transition.Child
                 as={React.Fragment}
                 enter="ease-out duration-300"
@@ -90,7 +111,10 @@ const MoodTrack = () => {
                     leaveTo="opacity-0 scale-95"
                   >
                     <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                      <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
+                      <Dialog.Title
+                        as="h3"
+                        className="text-lg font-medium leading-6 text-gray-900"
+                      >
                         How do you feel today?
                       </Dialog.Title>
                       <div className="mt-4 flex justify-around">
@@ -113,10 +137,19 @@ const MoodTrack = () => {
         </div>
         <div className="bg-white rounded-lg shadow-lg p-6">
           <div className="text-center mb-4">
-            <h2 className="text-2xl font-semibold text-gray-800">Mood Frequency</h2>
+            <h2 className="text-2xl font-semibold text-gray-800">
+              Mood Frequency
+            </h2>
           </div>
           <div className="mt-6 h-96">
-            <Bar data={data} options={{ responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }} />
+            <Bar
+              data={data}
+              options={{
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+              }}
+            />
           </div>
         </div>
       </div>

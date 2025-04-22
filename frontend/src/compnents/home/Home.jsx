@@ -6,14 +6,14 @@ import Navbar from '../navbar/Navbar';
 const Home = () => {
   return (
     <div>
-        <Navbar />
-        <div className='mt-20'>
+      <Navbar />
+      <div className="mt-20">
         <Home1 />
         <Home2 />
         <Home3 />
-        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

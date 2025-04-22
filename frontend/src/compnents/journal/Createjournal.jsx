@@ -10,7 +10,7 @@ const CreateJournal = () => {
   const user = localStorage.getItem('tokenUser');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     const formData = new FormData();
@@ -26,9 +26,9 @@ const CreateJournal = () => {
       const response = await fetch(`http://localhost:4000/${user}`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${user}`
+          Authorization: `Bearer ${user}`,
         },
-        body: formData
+        body: formData,
       });
 
       if (response.ok) {
@@ -48,7 +48,7 @@ const CreateJournal = () => {
     }
   };
 
-  const handleFileChange = (e) => {
+  const handleFileChange = e => {
     setCoverPicture(e.target.files[0]);
   };
 
@@ -57,12 +57,22 @@ const CreateJournal = () => {
       <Navbar />
       <div className="w-screen mt-32">
         <div className="max-w-md mx-auto bg-white rounded-lg overflow-hidden shadow-md">
-        <div className="px-6 py-4" style={{ background: 'linear-gradient(to right, #D1D5DB, #E5E7EB, #F3F4F6)' }}>
-
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Create Journal</h2>
+          <div
+            className="px-6 py-4"
+            style={{
+              background:
+                'linear-gradient(to right, #D1D5DB, #E5E7EB, #F3F4F6)',
+            }}
+          >
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              Create Journal
+            </h2>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="title"
+                >
                   Title
                 </label>
                 <input
@@ -71,11 +81,14 @@ const CreateJournal = () => {
                   type="text"
                   placeholder="Enter title"
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={e => setTitle(e.target.value)}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="article">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="article"
+                >
                   Article
                 </label>
                 <textarea
@@ -83,11 +96,14 @@ const CreateJournal = () => {
                   id="article"
                   placeholder="Write your journal here..."
                   value={article}
-                  onChange={(e) => setArticle(e.target.value)}
+                  onChange={e => setArticle(e.target.value)}
                 ></textarea>
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="tags">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="tags"
+                >
                   Tags
                 </label>
                 <input
@@ -96,11 +112,14 @@ const CreateJournal = () => {
                   type="text"
                   placeholder="Enter tags (comma separated)"
                   value={tags}
-                  onChange={(e) => setTags(e.target.value)}
+                  onChange={e => setTags(e.target.value)}
                 />
               </div>
               <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="coverPicture">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="coverPicture"
+                >
                   Cover Picture
                 </label>
                 <input

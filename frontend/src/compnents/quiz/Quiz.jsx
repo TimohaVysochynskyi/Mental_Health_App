@@ -24,7 +24,12 @@ const questions = [
   'How often do you avoid social situations due to fear of being judged or embarrassed?',
 ];
 
-const options = ['Not at all', 'Several days', 'More than half the days', 'Nearly every day'];
+const options = [
+  'Not at all',
+  'Several days',
+  'More than half the days',
+  'Nearly every day',
+];
 
 const Quiz = () => {
   const [answers, setAnswers] = useState(Array(questions.length).fill(''));
@@ -38,7 +43,7 @@ const Quiz = () => {
     setAnswers(newAnswers);
   };
 
-  const handleOptionHover = (index) => {
+  const handleOptionHover = index => {
     setHoveredOption(index);
   };
 
@@ -73,23 +78,26 @@ const Quiz = () => {
     <>
       <Navbar />
       <div
-        className='max-w-4xl mx-auto p-6'
+        className="max-w-4xl mx-auto p-6"
         style={{
           background: 'linear-gradient(to right, #D1D5DB, #E5E7EB, #F3F4F6)',
           borderRadius: '1rem',
-          boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
+          boxShadow:
+            '0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)',
           marginTop: '6rem',
         }}
       >
-        <h1 className='text-2xl font-bold mb-6 text-center'>Mental Health Quiz</h1>
+        <h1 className="text-2xl font-bold mb-6 text-center">
+          Mental Health Quiz
+        </h1>
         {questions.map((question, index) => (
-          <div key={index} className='mb-4 text-black font-bold m-12'>
+          <div key={index} className="mb-4 text-black font-bold m-12">
             <p className={`mb-2 text-lg`}>{`${index + 1}. ${question}`}</p>
-            <div className='flex flex-col space-y-2'>
+            <div className="flex flex-col space-y-2">
               {options.map((option, optionIndex) => (
                 <label
                   key={optionIndex}
-                  className={`flex items-center p-3 px-5 block cursor-pointer rounded-full border border-black border-opacity-20 ${
+                  className={`flex items-center p-3 px-5 cursor-pointer rounded-full border border-black border-opacity-20 ${
                     hoveredOption === index
                       ? 'hover:bg-black hover:text-white'
                       : 'hover:bg-gray-200'
@@ -98,14 +106,14 @@ const Quiz = () => {
                   onMouseLeave={handleOptionLeave}
                 >
                   <input
-                    type='radio'
+                    type="radio"
                     name={`question-${index}`}
                     value={option}
                     checked={answers[index] === option}
                     onChange={() => handleChange(index, option)}
-                    className='accent-primary'
+                    className="accent-primary"
                   />
-                  <span className='ps-3 text-lg font-normal'>{option}</span>
+                  <span className="ps-3 text-lg font-normal">{option}</span>
                 </label>
               ))}
             </div>
@@ -113,15 +121,15 @@ const Quiz = () => {
         ))}
         <button
           onClick={handleSubmit}
-          className='mt-6 w-half bg-blue-500 hover:bg-blue-700 text-white py-2 px-6 rounded-full transition-colors duration-300 ml-72'
+          className="mt-6 w-half bg-blue-500 hover:bg-blue-700 text-white py-2 px-6 rounded-full transition-colors duration-300 ml-72"
         >
           Submit
         </button>
 
         {loading ? (
-          <div className='flex justify-center mt-6'>
+          <div className="flex justify-center mt-6">
             <Loader
-              type='spinner-cub'
+              type="spinner-cub"
               bgColor={'#000000'}
               color={'#FFFFFF'}
               title={'spinner-cub'}
@@ -130,9 +138,9 @@ const Quiz = () => {
           </div>
         ) : (
           result && (
-            <div className='mt-6 p-4 bg-gray-100 rounded-lg'>
-              <h2 className='text-xl font-semibold mb-4'>Analysis Result</h2>
-              <p className='whitespace-pre-wrap'>{result}</p>
+            <div className="mt-6 p-4 bg-gray-100 rounded-lg">
+              <h2 className="text-xl font-semibold mb-4">Analysis Result</h2>
+              <p className="whitespace-pre-wrap">{result}</p>
             </div>
           )
         )}

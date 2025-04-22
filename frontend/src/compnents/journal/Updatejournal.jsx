@@ -15,7 +15,9 @@ const UpdateJournal = () => {
   useEffect(() => {
     const fetchJournal = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/${username}/${id}`);
+        const response = await axios.get(
+          `http://localhost:4000/${username}/${id}`
+        );
         if (response.status === 200) {
           const { title, article, tags, coverPicture } = response.data;
           setTitle(title);
@@ -34,7 +36,7 @@ const UpdateJournal = () => {
     fetchJournal();
   }, [username, id]);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     if (name === 'title') setTitle(value);
     if (name === 'article') setArticle(value);
@@ -45,7 +47,7 @@ const UpdateJournal = () => {
     navigate(`/${username}/profile`);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
       const formData = new FormData();
@@ -63,7 +65,7 @@ const UpdateJournal = () => {
 
       const response = await axios.put(
         `http://localhost:4000/journals/${username}/${id}`,
-        formDataObject,
+        formDataObject
       );
 
       if (response.status !== 200) {
@@ -81,79 +83,84 @@ const UpdateJournal = () => {
   return (
     <>
       <Navbar />
-      <div className='min-h-screen bg-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 mt-20'>
+      <div className="min-h-screen bg-white flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 mt-20">
         <div
-          className='max-w-3xl w-full bg-gray-100 rounded-lg shadow-md p-8'
-          style={{ background: 'linear-gradient(to right, #D1D5DB, #E5E7EB, #F3F4F6)' }}
+          className="max-w-3xl w-full bg-gray-100 rounded-lg shadow-md p-8"
+          style={{
+            background: 'linear-gradient(to right, #D1D5DB, #E5E7EB, #F3F4F6)',
+          }}
         >
-          <h2 className='text-3xl font-bold leading-9 text-gray-900 text-center mb-8'>
+          <h2 className="text-3xl font-bold leading-9 text-gray-900 text-center mb-8">
             Update your journal!
           </h2>
-          <form className='space-y-8' onSubmit={handleSubmit}>
-            <div className='space-y-6'>
+          <form className="space-y-8" onSubmit={handleSubmit}>
+            <div className="space-y-6">
               <div>
                 <label
-                  htmlFor='title'
-                  className='block text-sm font-medium leading-6 text-gray-900'
+                  htmlFor="title"
+                  className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Title
                 </label>
                 <input
-                  type='text'
-                  name='title'
-                  id='title'
+                  type="text"
+                  name="title"
+                  id="title"
                   value={title}
                   onChange={handleChange}
-                  className='mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6'
-                  placeholder='Your journal title'
+                  className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Your journal title"
                 />
               </div>
               <div>
                 <label
-                  htmlFor='article'
-                  className='block text-sm font-medium leading-6 text-gray-900'
+                  htmlFor="article"
+                  className="block text-sm font-medium leading-6 text-gray-900"
                 >
                   Your Journal
                 </label>
                 <textarea
-                  id='article'
-                  name='article'
+                  id="article"
+                  name="article"
                   rows={10}
                   value={article}
                   onChange={handleChange}
-                  className='mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6'
-                  placeholder='Write your journal here...'
+                  className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="Write your journal here..."
                 />
               </div>
               <div>
-                <label htmlFor='tags' className='block text-sm font-medium leading-6 text-gray-900'>
+                <label
+                  htmlFor="tags"
+                  className="block text-sm font-medium leading-6 text-gray-900"
+                >
                   Tags
                 </label>
                 <input
-                  type='text'
-                  name='tags'
-                  id='tags'
+                  type="text"
+                  name="tags"
+                  id="tags"
                   value={tags}
                   onChange={handleChange}
-                  className='mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6'
-                  placeholder='e.g., travel, food, lifestyle'
+                  className="mt-2 block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  placeholder="e.g., travel, food, lifestyle"
                 />
               </div>
             </div>
 
-            {error && <p className='text-red-500 text-center mt-4'>{error}</p>}
+            {error && <p className="text-red-500 text-center mt-4">{error}</p>}
 
-            <div className='mt-8 flex justify-end space-x-4'>
+            <div className="mt-8 flex justify-end space-x-4">
               <button
-                type='button'
+                type="button"
                 onClick={handleCancel}
-                className='text-lg font-semibold leading-6 text-gray-900'
+                className="text-lg font-semibold leading-6 text-gray-900"
               >
                 Cancel
               </button>
               <button
-                type='submit'
-                className='rounded-md bg-indigo-600 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+                type="submit"
+                className="rounded-md bg-indigo-600 px-6 py-3 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Save
               </button>
