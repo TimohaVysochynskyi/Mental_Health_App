@@ -119,7 +119,7 @@ const Profile = () => {
                   </div>
                 </div>
                 <div className='text-center mt-12'>
-                  <h3 className='text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2'>
+                  <h3 className='text-4xl font-semibold leading-normal mb-2 text-blueGray-700'>
                     {userDetails.name}
                   </h3>
                   <div className='mb-2 text-blueGray-600 mt-10'>
