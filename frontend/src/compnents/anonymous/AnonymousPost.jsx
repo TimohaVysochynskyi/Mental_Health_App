@@ -15,7 +15,7 @@ const AnonymousPost = () => {
     const postData = {
       title,
       article,
-      tags: tags.split(',').map(tag => tag.trim())
+      tags: tags.split(',').map((tag) => tag.trim()),
     };
 
     try {
@@ -23,9 +23,9 @@ const AnonymousPost = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${user}`
+          Authorization: `Bearer ${user}`,
         },
-        body: JSON.stringify(postData)
+        body: JSON.stringify(postData),
       });
 
       if (response.ok) {
@@ -35,7 +35,7 @@ const AnonymousPost = () => {
         setTitle('');
         setArticle('');
         setTags('');
-        navigate(`/${user}/anonymoussharing`);
+        navigate(`/anonymoussharing`);
       } else {
         console.error('Failed to create post');
       }
@@ -48,36 +48,38 @@ const AnonymousPost = () => {
     <>
       <Navbar />
       <div className='w-screen mt-[13%]'>
-        <div className="heading text-center font-bold text-2xl m-5 text-gray-800">New Anonymous Post</div>
-        <div className="editor mx-auto w-full sm:w-10/12 lg:w-8/12 xl:w-7/12 2xl:w-6/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg">
-          <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+        <div className='heading text-center font-bold text-2xl m-5 text-gray-800'>
+          New Anonymous Post
+        </div>
+        <div className='editor mx-auto w-full sm:w-10/12 lg:w-8/12 xl:w-7/12 2xl:w-6/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg'>
+          <form onSubmit={handleSubmit} className='flex flex-col space-y-4'>
             <input
-              className="title bg-gray-100 border border-gray-300 p-2 outline-none"
-              spellCheck="false"
-              placeholder="Title"
-              type="text"
+              className='title bg-gray-100 border border-gray-300 p-2 outline-none'
+              spellCheck='false'
+              placeholder='Title'
+              type='text'
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <textarea
-              className="description bg-gray-100 border border-gray-300 p-2 h-40 outline-none resize-none"
-              spellCheck="false"
-              placeholder="Describe everything about this post here"
+              className='description bg-gray-100 border border-gray-300 p-2 h-40 outline-none resize-none'
+              spellCheck='false'
+              placeholder='Describe everything about this post here'
               value={article}
               onChange={(e) => setArticle(e.target.value)}
             />
             <input
-              className="tags bg-gray-100 border border-gray-300 p-2 outline-none"
-              spellCheck="false"
-              placeholder="Tags (comma separated)"
-              type="text"
+              className='tags bg-gray-100 border border-gray-300 p-2 outline-none'
+              spellCheck='false'
+              placeholder='Tags (comma separated)'
+              type='text'
               value={tags}
               onChange={(e) => setTags(e.target.value)}
             />
-            <div className="flex flex-col sm:flex-row sm:justify-between">
+            <div className='flex flex-col sm:flex-row sm:justify-between'>
               <button
-                type="button"
-                className="btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500"
+                type='button'
+                className='btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500'
                 onClick={() => {
                   setTitle('');
                   setArticle('');
@@ -87,8 +89,8 @@ const AnonymousPost = () => {
                 Cancel
               </button>
               <button
-                type="submit"
-                className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-white bg-indigo-500"
+                type='submit'
+                className='btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-white bg-indigo-500'
               >
                 Post
               </button>

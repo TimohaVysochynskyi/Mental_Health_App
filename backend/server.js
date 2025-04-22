@@ -14,29 +14,24 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import bodyParser from 'body-parser';
 
-
 mongoose.set('strictQuery', true);
 
 const app = express();
 const server = http.createServer(app); // Create HTTP server
 
-
 app.use(express.json());
-app.use(cors({
-  // origin: '*',
-  // methods: ['GET', 'POST', 'PATCH', 'DELETE', 'PUT'],
-  // credentials: true,
-
-}));
+app.use(cors({}));
 app.use(cookieParser());
-app.use (bodyParser.json ({extended: true}));
-app.use (bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  }),
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -52,6 +47,5 @@ app.use('/', userRoutes);
 const port = process.env.PORT || 4000;
 
 server.listen(port, () => {
-  console.log("Server is running on port", port);
+  console.log('Server is running on port', port);
 });
-

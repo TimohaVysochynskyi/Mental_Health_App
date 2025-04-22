@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Routes, Route, Navigate, useParams} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useParams } from 'react-router-dom';
 import Home from './compnents/home/Home';
 import Profile from './compnents/profile/Profile';
 import NotFound from './compnents/notFound/NotFound';
@@ -27,7 +27,7 @@ const PrivateRoute = ({ children }) => {
   if (!token || usernameFromUrl !== usernameFromStorage) {
     localStorage.removeItem('token');
     localStorage.removeItem('tokenUser');
-    return <Navigate to="/unauthorizedAccess" />;
+    return <Navigate to='/unauthorizedAccess' />;
   }
 
   return children;
@@ -37,28 +37,91 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/:username/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/unauthorizedAccess" element={<NoAccess />} />
-        <Route path="/:username/updateprofile" element={<PrivateRoute><ProfileUpdate /></PrivateRoute>} />
-        <Route path="/:username/anonymoussharing" element={<PrivateRoute><AnonymousSharing /></PrivateRoute>} />
-        <Route path="/:username/createanonymouspost" element={<PrivateRoute><AnonymousPost /></PrivateRoute>} />
-        <Route path="/:username/allanonymousposts" element={<PrivateRoute><AllAnonymousPost /></PrivateRoute>} />
-        <Route path="/:username/mood" element={<PrivateRoute><MoodTrack /></PrivateRoute>} />
-        <Route path="/:username/quiz" element={<PrivateRoute><Quiz /></PrivateRoute>} />
-        <Route path="/:username/therapist" element={<PrivateRoute><Therapist /></PrivateRoute>} />
-        <Route path="/aboutus" element={<AboutUs />} />
+        <Route path='/' element={<Home />} />
+        <Route
+          path='/:username/profile'
+          element={
+            <PrivateRoute>
+              <Profile />
+            </PrivateRoute>
+          }
+        />
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/unauthorizedAccess' element={<NoAccess />} />
+        <Route
+          path='/:username/updateprofile'
+          element={
+            <PrivateRoute>
+              <ProfileUpdate />
+            </PrivateRoute>
+          }
+        />
+        <Route path='/anonymoussharing' element={<AnonymousSharing />} />
+        <Route path='/createanonymouspost' element={<AnonymousPost />} />
+        <Route path='/allanonymousposts' element={<AllAnonymousPost />} />
+        <Route
+          path='/:username/mood'
+          element={
+            <PrivateRoute>
+              <MoodTrack />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/:username/quiz'
+          element={
+            <PrivateRoute>
+              <Quiz />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/:username/therapist'
+          element={
+            <PrivateRoute>
+              <Therapist />
+            </PrivateRoute>
+          }
+        />
+        <Route path='/aboutus' element={<AboutUs />} />
 
-        <Route path='/:username/createjournal' element={<PrivateRoute><Createjournal /></PrivateRoute>} />
-        <Route path='/:username/readjournals' element={<PrivateRoute><Readjournal /></PrivateRoute>} />
-        <Route path='/:username/readjournals/:id' element={<PrivateRoute><JournalDetail /></PrivateRoute>} />
-        <Route path="/:username/journals/:id/edit" element={<PrivateRoute><UpdateJournal /> </PrivateRoute>} />
+        <Route
+          path='/:username/createjournal'
+          element={
+            <PrivateRoute>
+              <Createjournal />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/:username/readjournals'
+          element={
+            <PrivateRoute>
+              <Readjournal />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/:username/readjournals/:id'
+          element={
+            <PrivateRoute>
+              <JournalDetail />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path='/:username/journals/:id/edit'
+          element={
+            <PrivateRoute>
+              <UpdateJournal />{' '}
+            </PrivateRoute>
+          }
+        />
 
-        <Route path="*" element={<NotFound />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
-      </BrowserRouter>
+    </BrowserRouter>
   );
 }
 
