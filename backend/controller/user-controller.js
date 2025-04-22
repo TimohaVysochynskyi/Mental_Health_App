@@ -71,7 +71,9 @@ export const deleteUser = async (req, res) => {
     // Delete all journals associated with the user
     await Journal.deleteMany({ _id: { $in: user.journals } });
 
-    return res.status(200).json({ msg: 'User and associated journals deleted successfully!' });
+    return res
+      .status(200)
+      .json({ msg: 'User and associated journals deleted successfully!' });
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
@@ -85,10 +87,20 @@ export const updateUser = async (req, res) => {
       return res.status(400).json({ msg: 'No data provided to update!' });
     }
 
-    const allowedUpdates = ['name', 'email', 'bio', 'password', 'age', 'gender', 'profilePicture'];
+    const allowedUpdates = [
+      'name',
+      'email',
+      'bio',
+      'password',
+      'age',
+      'gender',
+      'profilePicture',
+    ];
     const updates = Object.keys(req.body);
     if (req.file) updates.push('profilePicture');
-    const isValidUpdate = updates.every((update) => allowedUpdates.includes(update));
+    const isValidUpdate = updates.every((update) =>
+      allowedUpdates.includes(update),
+    );
 
     if (!isValidUpdate) {
       return res.status(400).json({ msg: 'Invalid updates!' });

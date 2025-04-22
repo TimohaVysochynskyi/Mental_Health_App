@@ -106,7 +106,9 @@ export const delete_journal = async (req, res) => {
     }
 
     // Remove the journal ID from the user's journals array
-    user.journals = user.journals.filter((journalId) => journalId.toString() !== id);
+    user.journals = user.journals.filter(
+      (journalId) => journalId.toString() !== id,
+    );
     await user.save();
 
     return res.status(200).json({ msg: 'Journal deleted successfully!' });
