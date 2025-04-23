@@ -33,6 +33,7 @@ const Navbar = () => {
       setIsLoggedIn(false);
       navigate('/login');
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.error('Error logging out:', err);
     }
   };
@@ -260,12 +261,6 @@ const Navbar = () => {
                       className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       Anonymous Sharing
-                    </a>
-                    <a
-                      href="/aboutus"
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    >
-                      About Us
                     </a>
                   </div>
                   <div className="py-6">

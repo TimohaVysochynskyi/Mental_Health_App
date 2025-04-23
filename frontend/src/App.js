@@ -16,7 +16,6 @@ import ProfileUpdate from './compnents/profile/ProfileUpdate';
 import AnonymousSharing from './compnents/anonymous/AnonymousSharing';
 import AnonymousPost from './compnents/anonymous/AnonymousPost';
 import AllAnonymousPost from './compnents/anonymous/AllAnonymousPost';
-import AboutUs from './compnents/aboutUs/AboutUs';
 import Createjournal from './compnents/journal/Createjournal.jsx';
 import Readjournal from './compnents/journal/Readjournal.jsx';
 import JournalDetail from './compnents/journal/Readonejournal.jsx';
@@ -90,7 +89,6 @@ function App() {
             </PrivateRoute>
           }
         />
-        <Route path="/aboutus" element={<AboutUs />} />
 
         <Route
           path="/:username/createjournal"

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PhotoIcon } from '@heroicons/react/24/solid';
 
@@ -84,9 +84,11 @@ export default function Signup() {
       }
 
       const data = await response.json();
+      // eslint-disable-next-line no-console
       console.log('Signup successful:', data);
       navigate('/login');
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error signing up:', error);
     }
   };

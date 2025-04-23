@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import Loader from 'react-js-loader';
+import ReactMarkdown from 'react-markdown';
 import Navbar from '../navbar/Navbar';
 import './Therapist.css';
 
+// eslint-disable-next-line no-undef
 const API_KEY = process.env.REACT_APP_API_KEY;
 const genAI = new GoogleGenerativeAI(API_KEY);
 
@@ -33,9 +35,6 @@ const Therapist = () => {
       const result = await model.generateContent(prompt);
       const response = await result.response;
       let aiMessage = await response.text();
-
-      // Replace **word** with <strong>word</strong>
-      aiMessage = aiMessage.replace(/\*\*(.*?)\*\*/g, '$1');
 
       // Simulate typing delay
       await new Promise(resolve => setTimeout(resolve, 1000));
@@ -82,7 +81,11 @@ const Therapist = () => {
                 msg.sender === 'user' ? 'user-message' : 'ai-message'
               }`}
             >
-              {msg.text}
+              {msg.sender === 'ai' ? (
+                <ReactMarkdown>{msg.text}</ReactMarkdown>
+              ) : (
+                msg.text
+              )}
             </div>
           ))}
           {loading && <TypingAnimation color="#007BFF" />}

@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState } from 'react';
 import Navbar from '../navbar/Navbar';
 import { useNavigate } from 'react-router-dom';
@@ -32,13 +33,11 @@ const AnonymousPost = () => {
       );
 
       if (response.ok) {
-        const newPost = await response.json();
-        console.log('Post created:', newPost);
         // Clear the form
         setTitle('');
         setArticle('');
         setTags('');
-        navigate(`/anonymoussharing`);
+        navigate(`/allanonymousposts`);
       } else {
         console.error('Failed to create post');
       }
