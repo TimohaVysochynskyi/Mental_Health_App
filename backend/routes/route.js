@@ -23,7 +23,7 @@ import {
 import { createMood, getMoods } from '../controller/mood-controller.js';
 const router = express.Router();
 import upload from '../multer/multerConfig.js';
-import upload1 from '../multer/multerConfig1.js';
+import coverPictures from '../multer/multerConfigCover.js';
 import { getJournalById } from '../controller/journal-controller.js';
 import cors from 'cors';
 
@@ -39,7 +39,7 @@ router.patch('/:username/update-user', updateUser);
 router.get('/anonymousPosts', getAnonymousPosts);
 router.post('/createAnonymousPosts', createAnonymousPost);
 
-router.post('/:username', upload1.single('coverPicture'), create_journal);
+router.post('/:username', coverPictures.single('coverPicture'), create_journal);
 router.get('/:username/journals', getPostsByUsername);
 router.put('/journals/:username/:id', update_journal);
 router.delete('/journal-delete/:username/:id', delete_journal);
