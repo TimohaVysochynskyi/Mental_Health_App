@@ -54,6 +54,7 @@ const Navbar = () => {
       setIsLoggedIn(false);
       navigate('/login');
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error deleting user:', error);
     }
   };
@@ -109,6 +110,12 @@ const Navbar = () => {
               className="text-sm font-semibold leading-6 text-gray-900"
             >
               Mood Tracker
+            </a>
+            <a
+              href={`/${user}/journals`}
+              className="text-sm font-semibold leading-6 text-gray-900"
+            >
+              My Journal
             </a>
             <a
               href={`/${user}/therapist`}
@@ -243,6 +250,12 @@ const Navbar = () => {
                       className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                     >
                       Mood Tracker
+                    </a>
+                    <a
+                      href={`/${user}/journals`}
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    >
+                      My Journal
                     </a>
                     <a
                       href={`/${user}/therapist`}

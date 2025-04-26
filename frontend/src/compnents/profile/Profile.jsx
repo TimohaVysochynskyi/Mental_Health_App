@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
 
 import Loader from 'react-js-loader';
-import Readjournal from '../journal/Readjournal';
 import defaultProfilePicture from './download2.jpg';
 
 const Profile = () => {
@@ -160,9 +159,6 @@ const Profile = () => {
             </div>
           </div>
         </section>
-        <div className="-mt-20">
-          <Readjournal />
-        </div>
       </main>
     </>
   );

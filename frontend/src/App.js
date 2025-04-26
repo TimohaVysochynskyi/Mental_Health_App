@@ -17,7 +17,7 @@ import AnonymousSharing from './compnents/anonymous/AnonymousSharing';
 import AnonymousPost from './compnents/anonymous/AnonymousPost';
 import AllAnonymousPost from './compnents/anonymous/AllAnonymousPost';
 import Createjournal from './compnents/journal/Createjournal.jsx';
-import Readjournal from './compnents/journal/Readjournal.jsx';
+import Readjournal from './compnents/myJournals/index.jsx';
 import JournalDetail from './compnents/journal/Readonejournal.jsx';
 import MoodTrack from './compnents/moodtrack/MoodTrack.jsx';
 import Quiz from './compnents/quiz/Quiz.jsx';
@@ -91,6 +91,15 @@ function App() {
         />
 
         <Route
+          // path="/:username/createjournal"
+          path="/:username/journals"
+          element={
+            <PrivateRoute>
+              <Readjournal />
+            </PrivateRoute>
+          }
+        />
+        <Route
           path="/:username/createjournal"
           element={
             <PrivateRoute>
@@ -99,7 +108,7 @@ function App() {
           }
         />
         <Route
-          path="/:username/readjournals"
+          path="/:username/journals"
           element={
             <PrivateRoute>
               <Readjournal />
@@ -107,7 +116,7 @@ function App() {
           }
         />
         <Route
-          path="/:username/readjournals/:id"
+          path="/:username/journals/:id"
           element={
             <PrivateRoute>
               <JournalDetail />
