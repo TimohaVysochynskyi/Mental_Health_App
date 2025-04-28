@@ -57,15 +57,18 @@ const Readjournal = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-white pt-16 sm:pt-20 pb-16 sm:pb-20">
-        <div className="container mx-auto px-6 py-8">
-          <div className="max-w-3xl mx-auto text-center mb-8">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      <div className="bg-white pt-12 sm:pt-16 pb-12 sm:pb-16">
+        <div className="container mx-auto px-4 py-6">
+          <div className="max-w-3xl mx-auto mb-6 flex items-center justify-between">
+            <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
               Your Journal
             </h2>
-            <p className="mt-2 text-lg leading-8 text-gray-600">
-              Keep your memorable days stored with you!
-            </p>
+            <Link
+              to={`/${username}/createjournal`}
+              className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 text-white font-semibold text-base rounded-lg shadow-md transition-colors duration-200"
+            >
+              Create Journal
+            </Link>
           </div>
           <div className="container mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {journals.map(journal => {

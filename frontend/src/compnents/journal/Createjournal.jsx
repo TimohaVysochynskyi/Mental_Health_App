@@ -39,7 +39,7 @@ const CreateJournal = () => {
         setArticle('');
         setTags('');
         setCoverPicture(null);
-        navigate(`/${user}/profile`);
+        navigate(`/${user}/journals`);
       } else {
         console.error('Failed to create journal');
       }

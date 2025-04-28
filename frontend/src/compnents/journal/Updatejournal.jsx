@@ -44,7 +44,7 @@ const UpdateJournal = () => {
   };
 
   const handleCancel = () => {
-    navigate(`/${username}/profile`);
+    navigate(`/${username}/journals`);
   };
 
   const handleSubmit = async e => {
