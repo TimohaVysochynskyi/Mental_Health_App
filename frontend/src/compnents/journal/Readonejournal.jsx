@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import defaultCoverImage from './download.jpg'; // Make sure this path is correct relative to your file structure
+import Navbar from '../navbar/Navbar';
 
 const JournalDetail = () => {
   const { id, username } = useParams();
@@ -23,11 +24,19 @@ const JournalDetail = () => {
   }, [username, id]);
 
   if (error) {
-    return <div>{error}</div>;
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-red-600 text-lg font-medium">{error}</div>
+      </div>
+    );
   }
 
   if (!journal) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-pulse text-gray-600">Loading...</div>
+      </div>
+    );
   }
 
   const coverImage = journal.coverPicture
@@ -35,36 +44,49 @@ const JournalDetail = () => {
     : defaultCoverImage;
 
   return (
-    <div className="bg-white py-16 sm:py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl lg:mx-0 text-center">
-          <h2 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-            {journal.title}
-          </h2>
-        </div>
-        <div className="mt-10 flex justify-center">
-          <img
-            src={coverImage}
-            alt="Cover"
-            className="h-96 w-full object-cover rounded-lg shadow-md"
-          />
-        </div>
-        <div className="mt-10 max-w-2xl mx-auto text-left">
-          <p className="text-lg leading-8 text-gray-800">{journal.article}</p>
-          <div className="mt-5 flex flex-wrap gap-2">
-            {journal.tags &&
-              journal.tags.map((tag, index) => (
-                <span
-                  key={index}
-                  className="inline-flex items-center rounded-full bg-blue-100 px-4 py-1 text-lg font-medium text-blue-800"
-                >
-                  {tag}
-                </span>
-              ))}
+    <>
+      <Navbar />
+      <div className="mt-12 min-h-screen py-12">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+            <div className="p-8">
+              <h1 className="text-4xl font-bold text-gray-900 mb-6 leading-tight">
+                {journal.title}
+              </h1>
+
+              <div className="relative aspect-[16/9] w-full mb-8 rounded-xl overflow-hidden">
+                <img
+                  src={coverImage}
+                  alt="Cover"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              <div className="prose prose-lg max-w-none">
+                <p className="text-gray-700 leading-relaxed text-lg">
+                  {journal.article}
+                </p>
+              </div>
+
+              {journal.tags && journal.tags.length > 0 && (
+                <div className="mt-8 pt-6 border-t border-gray-100">
+                  <div className="flex flex-wrap gap-2">
+                    {journal.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-1 text-sm font-medium text-indigo-800 hover:bg-indigo-200 transition-colors duration-200"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -57,9 +57,9 @@ const Readjournal = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-white py-24 sm:py-32">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="mx-auto max-w-2xl lg:mx-0">
+      <div className="bg-white pt-16 sm:pt-20 pb-16 sm:pb-20">
+        <div className="container mx-auto px-6 py-8">
+          <div className="max-w-3xl mx-auto text-center mb-8">
             <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
               Your Journal
             </h2>
@@ -67,20 +67,30 @@ const Readjournal = () => {
               Keep your memorable days stored with you!
             </p>
           </div>
-          <div className="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          <div className="container mx-auto px-6 py-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {journals.map(journal => {
               const coverImage = journal.coverPicture
                 ? `http://localhost:4000/${journal.coverPicture}`
                 : defaultCoverImage;
 
+              const displayTags = journal.tags ? journal.tags.slice(0, 5) : [];
+              const extraCount = journal.tags
+                ? journal.tags.length - displayTags.length
+                : 0;
+
               return (
                 <div
                   key={journal._id}
-                  className="bg-white shadow-md rounded-lg overflow-hidden relative"
+                  className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
                 >
-                  <article className="p-6 flex flex-col justify-between h-full">
+                  <article className="p-6 flex flex-col justify-between h-full space-y-4">
+                    <img
+                      src={coverImage}
+                      alt="Cover"
+                      className="w-full h-48 object-cover"
+                    />
                     <div>
-                      <div className="flex items-center gap-x-4 text-xs mb-3">
+                      <div className="flex items-center gap-x-3 text-xs text-gray-500">
                         <time
                           dateTime={journal.createdAt}
                           className="text-gray-500"
@@ -89,41 +99,40 @@ const Readjournal = () => {
                         </time>
                       </div>
                       <div className="group relative">
-                        <h3 className="text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600 mb-2 line-clamp-3">
+                        <h3 className="text-xl font-bold text-gray-800 line-clamp-2">
                           <Link to={`/${username}/journals/${journal._id}`}>
                             {journal.title}
                           </Link>
                         </h3>
-                        <p className="text-sm leading-6 text-gray-600 mb-4 line-clamp-1">
+                        <p className="text-sm text-gray-600 line-clamp-2">
                           {journal.article}
                         </p>
                       </div>
                     </div>
-                    <img
-                      src={coverImage}
-                      alt="Cover"
-                      className="mt-auto h-24 w-full object-cover"
-                    />
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      {journal.tags &&
-                        journal.tags.map((tag, index) => (
-                          <span
-                            key={index}
-                            className="inline-flex items-center rounded-full bg-blue-100 px-3 py-0.5 text-sm font-medium text-blue-800"
-                          >
-                            {tag}
-                          </span>
-                        ))}
+                    <div className="flex gap-2 overflow-hidden whitespace-nowrap">
+                      {displayTags.map((tag, index) => (
+                        <span
+                          key={index}
+                          className="inline-flex flex-shrink-0 items-center rounded-full bg-blue-100 px-3 py-0.5 text-sm font-medium text-blue-800"
+                        >
+                          {tag.length > 20 ? `${tag.slice(0, 17)}...` : tag}
+                        </span>
+                      ))}
+                      {extraCount > 0 && (
+                        <span className="inline-flex flex-shrink-0 items-center rounded-full bg-gray-200 px-3 py-0.5 text-sm font-medium text-gray-600">
+                          +{extraCount}
+                        </span>
+                      )}
                     </div>
-                    <div className="absolute top-2 right-2 flex gap-2">
+                    <div className="flex justify-end space-x-2">
                       <button
-                        className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600"
+                        className="px-3 py-1 text-sm font-medium border border-blue-500 text-blue-500 rounded hover:bg-blue-50 transition"
                         onClick={() => handleEdit(journal._id)}
                       >
                         Edit
                       </button>
                       <button
-                        className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600"
+                        className="px-3 py-1 text-sm font-medium border border-red-500 text-red-500 rounded hover:bg-red-50 transition"
                         onClick={() => handleDelete(journal._id)}
                       >
                         Delete
@@ -136,12 +145,12 @@ const Readjournal = () => {
           </div>
         </div>
         {showConfirmationModal && (
-          <div className="modal-overlay">
-            <div className="modal-content">
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg p-6 w-11/12 max-w-md">
               <p className="text-lg font-semibold mb-4">
                 Are you sure you want to delete this journal?
               </p>
-              <div className="modal-buttons">
+              <div className="flex justify-end space-x-4 mt-4">
                 <button
                   className="bg-red-500 text-white px-4 py-2 rounded-md mr-2 hover:bg-red-600"
                   onClick={confirmDelete}
