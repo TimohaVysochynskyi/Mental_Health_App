@@ -3,7 +3,7 @@ import User from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
 
-export const create_journal = async (req, res) => {
+export const createJournal = async (req, res) => {
   const { title, article, tags } = req.body;
   const { username } = req.params;
   console.log(username);
@@ -60,7 +60,7 @@ export const getPostsByUsername = async (req, res) => {
 };
 
 // update your journal
-export const update_journal = async (req, res) => {
+export const updateJournal = async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -85,7 +85,7 @@ export const update_journal = async (req, res) => {
 };
 
 // delete journal
-export const delete_journal = async (req, res) => {
+export const deleteJournal = async (req, res) => {
   try {
     const { id, username } = req.params;
 

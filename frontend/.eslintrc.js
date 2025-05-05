@@ -21,7 +21,7 @@ module.exports = {
   rules: {
     // your overrides, e.g.:
     'react/prop-types': 'off',
-    'no-console': 'warn',
+    // 'no-console': 'warn',
   },
   settings: {
     react: {

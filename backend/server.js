@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import session from 'express-session';
 import passport from 'passport';
-import userRoutes from './routes/route.js';
+import userRoutes from './routes/index.js';
 import connectDB from './database/db.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -39,7 +39,10 @@ app.use(passport.session());
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-app.use('/coverPictures', express.static(path.join(__dirname, 'coverPictures')));
+app.use(
+  '/coverPictures',
+  express.static(path.join(__dirname, 'coverPictures')),
+);
 
 // Routes
 app.use('/', userRoutes);
