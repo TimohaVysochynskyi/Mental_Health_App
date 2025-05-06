@@ -66,7 +66,7 @@ const TherapistPage = () => {
         .map(msg => `${msg.sender === 'user' ? 'User' : 'AI'}: ${msg.text}`)
         .join('\n');
 
-      const prompt = `Analyse the user's input and give suggestions or talk with them and provide an answer in paragraphs with spaces between paragraphs and points. Respond as if you are talking to the user in the first person, not the third person:\n\nUser: ${promptContext}\nTherapist:`;
+      const prompt = `You are a helpful and empathetic AI therapist. Answer the user's message clearly and concisely in the first person (as "I"). Do not repeat or rephrase the user's input. Focus directly on providing thoughtful, useful guidance or feedback. Use short paragraphs to separate ideas and make the response easy to read.\n\n${promptContext}`;
 
       const result = await model.generateContent(prompt);
       const response = await result.response;
